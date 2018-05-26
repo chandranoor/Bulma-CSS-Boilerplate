@@ -69,7 +69,7 @@ gulp.task('renameSources', function() {
     .pipe(gulp.dest('dist/'));
 });
 
-gulp.task("build", [/*'minifyScripts', */ 'minifyCss'], function() {
+gulp.task("release", [/*'minifyScripts', */ 'minifyCss'], function() {
   return gulp.src([
 		'*.html',
 		'*.php',
@@ -79,7 +79,7 @@ gulp.task("build", [/*'minifyScripts', */ 'minifyCss'], function() {
 		.pipe(gulp.dest('dist'));
 });
 
-gulp.task('serve', ['watchFiles'], function(){
+gulp.task('go', ['watchFiles'], function(){
   browserSync.init({
 		server: "./",
 		
@@ -89,6 +89,6 @@ gulp.task('serve', ['watchFiles'], function(){
   gulp.watch(['*.html', '*.php']).on('change', browserSync.reload);
 });
 
-gulp.task("default", ["clean", 'build'], function() {
+gulp.task("default", ["clean", 'release'], function() {
   gulp.start('renameSources');
 });
