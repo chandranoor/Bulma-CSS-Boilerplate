@@ -1,0 +1,16 @@
+{
+  "name": "bulma-boilerplate-starter-template",
+  "version": "1.0.0",
+  "description": "This is Bulma CSS Boilerplate / Starter template by Chandra Noor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bulma",
+    "css",
+    "boilerplate"
+  ],
+  "author": "Chandra Noor",
+  "license": "MIT"
+}
