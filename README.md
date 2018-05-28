@@ -37,7 +37,7 @@ Your final code can found on folder `dist`
 ## Edit SCSS
 ---
 To edit bulma SASS file just go to
-> `assets/scss/`
+> `assets/sass/`
 
 <br>
 
