@@ -31,7 +31,7 @@ gulp.task("minifyScripts", ["concatScripts"], function() {
 });
 */
 gulp.task('compileSass', function() {
-  return gulp.src("assets/sass/bulma.sass")
+  return gulp.src(["assets/sass/bulma/bulma.sass","assets/sass/custom/main.sass"])
     .pipe(maps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer())
@@ -41,21 +41,23 @@ gulp.task('compileSass', function() {
 });
 
 gulp.task("minifyCss", ["compileSass"], function() {
-  return gulp.src("assets/css/bulma.css")
+  return gulp.src(["assets/css/bulma.css","assets/css/main.css"])
     .pipe(cssmin())
-    .pipe(rename('bulma.min.css'))
+    .pipe(rename({
+			suffix: '.min'
+		}))
     .pipe(gulp.dest('dist/assets/css'));
 });
 
 gulp.task('watchFiles', function() {
-  gulp.watch('assets/css/**/*.scss', ['compileSass']);
+	gulp.watch(['assets/sass/**/**/*.sass', 'assets/sass/**/*.sass'], ['compileSass']);
 	/* To enabled auto refresh when JS change, just uncomment this line ad change the source file below
 	gulp.watch('assets/js/*.js', ['concatScripts']);
 	*/
 })
 
 gulp.task('clean', function() {
-	del(['dist', 'assets/css/main.css*', 'assets/css/bulma.css*', 'assets/js/main*.js*']);
+	del(['dist', 'assets/css/main.css*', 'assets/css/bulma.css*']);
 });
 
 gulp.task('renameSources', function() {
@@ -64,7 +66,8 @@ gulp.task('renameSources', function() {
 			/* Enable JS rename resources please uncomment code below
 			'js': 'assets/js/main.min.js',
 			*/
-      'css': 'assets/css/bulma.min.css'
+			'bulmaCSS': 'assets/css/bulma.min.css',
+			'mainCSS': 'assets/css/main.min.css'
     }))
     .pipe(gulp.dest('dist/'));
 });
@@ -85,7 +88,7 @@ gulp.task('go', ['watchFiles'], function(){
 		
   });
 
-  gulp.watch("assets/css/**/*.scss", ['watchFiles']);
+	gulp.watch(["assets/sass/**/*.sass", "assets/sass/**/**/*.sass"], ['watchFiles']);
   gulp.watch(['*.html', '*.php']).on('change', browserSync.reload);
 });
 
